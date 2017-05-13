@@ -131,7 +131,7 @@
                                     </div>
                                     <div class="row">
   					<div class="input-field col s6">
-					     <input  name="contra" id="contra" type="text" class="validate" value="${contra}">
+					     <input  name="contra" id="contra" type="Password" class="validate" value="${contra}">
 					     <label for="contra" >Contraseña</label>
                                         </div>					       
                                     </div>
