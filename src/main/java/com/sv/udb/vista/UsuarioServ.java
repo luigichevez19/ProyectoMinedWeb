@@ -131,7 +131,7 @@ public class UsuarioServ extends HttpServlet {
             }
             
             request.setAttribute("mensAlert", mens);
-             request.getRequestDispatcher("/usuarios.jsp").forward(request, response);
+             request.getRequestDispatcher("/Usuarios.jsp").forward(request, response);
            
              
         }
