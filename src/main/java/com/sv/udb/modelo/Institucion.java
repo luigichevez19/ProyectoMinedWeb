@@ -61,6 +61,10 @@ public class Institucion {
         this.estadoS = estadoS;  
         
     }
+
+    public Institucion(boolean estado) {
+        this.estado = estado;
+    }
    
 
     @Override

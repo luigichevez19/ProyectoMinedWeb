@@ -229,5 +229,39 @@ public class CtrlMunicipios {
         return resp;
         
     }
+     public List<Municipios> combox()
+    {
+        List<Municipios> resp = new ArrayList<>();
+        Connection cn =new Conexion().getConn();
+        try {
+            PreparedStatement cmd = cn.prepareStatement("select m.id_muni,m.muni,d.dept from municipio m inner join departamento d on  m.id_dept = d.id_dept");
+            ResultSet rs = cmd.executeQuery();
+            while(rs.next())
+            {
+               resp.add(new Municipios(rs.getInt(1),rs.getString(2),rs.getString(3)));
+            }
+        } catch (Exception err) 
+        {
+            err.printStackTrace();
+        }
+        finally
+        {
+            try {
+                 if(cn!=null)
+                {
+                    if(!cn.isClosed())
+                    {
+                        cn.close();
+                    }
+                }
+                
+            } catch (SQLException err) {
+                err.printStackTrace();
+            }
+            
+        }
+        return resp;
+        
+    }
 }
 

@@ -12,8 +12,16 @@ package com.sv.udb.modelo;
 public class Municipios {
 
     private int idMuni;
-    private String muni;
+    private String muni,depa;
     private int idDept;
+
+    public String getDepa() {
+        return depa;
+    }
+
+    public void setDepa(String depa) {
+        this.depa = depa;
+    }
     
     public int getIdMuni() {
         return idMuni;
@@ -55,6 +63,14 @@ public class Municipios {
     public String toString() {
         return this.muni;
     }
+
+    public Municipios(int idMuni, String muni, String depa) {
+        this.idMuni = idMuni;
+        this.muni = muni;
+        this.depa = depa;
+    }
+
+    
     
     
 }
