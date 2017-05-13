@@ -3,6 +3,16 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
+          <!-- Import Google Icon Font -->
+    <link type='text/css' rel='stylesheet' href='css/icons.css'/>
+  
+    <!-- Import materialize.css -->
+    <link type='text/css' rel='stylesheet' href='webjars/materialize/0.98.0/dist/css/materialize.min.css'  media='screen,projection'/>
+    <!-- Let browser know website is optimized for mobile -->
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+     <script type="text/javascript" src="webjars/jquery/3.2.1/dist/jquery.min.js"></script>
+    <script type='text/javascript' src='webjars/materialize/0.98.0/dist/js/jquery.min.js'></script>
+    <script type='text/javascript' src='webjars/materialize/0.98.0/dist/js/materialize.min.js'></script>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
