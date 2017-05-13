@@ -37,7 +37,7 @@ public class DepaServ extends HttpServlet {
         String mens= "";
         if(!esValido)
         {
-            response.sendRedirect(request.getContextPath()+ "/index.jsp");
+            response.sendRedirect(request.getContextPath()+ "/Departamentos.jsp");
         }
         else
         {
