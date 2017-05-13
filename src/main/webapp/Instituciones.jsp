@@ -9,6 +9,7 @@
 <%@page import="com.sv.udb.controlador.InstitucionCtrl"%>
 <%@page import="com.sv.udb.modelo.Institucion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -88,10 +89,13 @@
                                <label>Departamento/Municipio</label>
                           </div>
                          </div>
-                               
+                            <c:if test="${codi==null}">   
                        <input type="submit" class="btn blue-grey col s3 offset-s2" name="btnInsti" value="Guardar"/>  
+                            </c:if>
+                       <c:if test="${codi != '' and codi!=null}">
                        <input type="submit" class="btn blue-grey col s3 offset-s1" name="btnInsti" value="Actualizar"/>  <br>
-                    </form>
+                       </c:if>
+                       </form>
                          </div>
                         <div class="row">
                        <h1  class="col s7 offset-s3">Instituciones  Registradas</h1>
@@ -124,14 +128,18 @@
                            }
                           %>
                   </table>
-                  <input type="submit" class="btn blue-grey col s3 offset-s2" name="btnInsti" value="Consultar"/>  
+                  <input type="submit" class="btn blue-grey col s3 offset-s2" name="btnInsti" value="Consultar"/> 
                   <input type="submit" class="btn blue-grey col s3 offset-s1" name="btnInsti" value="Modificar Estado"/>  
+                   
               </form>
                   </div>
     </body>
       <script>
+        
                $(document).ready(function() {
+                   
     $('select').material_select();
   });
           </script>
+       
 </html>
