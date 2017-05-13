@@ -13,33 +13,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-<developer>
-            <id>Walter Flores Paz</id>
-            <email>walterefpaz@hotmail.com</email>
-            <organization>Freelancer</organization>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
-            <timezone>-6:00</timezone>
-        </developer>
-        <developer>
-            <id>Oscar Quevedo</id>
-            <email>oscarqp1@gmail.com</email>
-            <organization>Freelancer</organization>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
-            <timezone>-6:00</timezone>
-        </developer>
-        <developer>
-            <id>Luis Chévez</id>
-            <email>luigichevez@gmail.com</email>
-            <organization>Freelancer</organization>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
-            <timezone>-6:00</timezone>
-        </developer>
+
     <dependencies>
         
         <dependency>
