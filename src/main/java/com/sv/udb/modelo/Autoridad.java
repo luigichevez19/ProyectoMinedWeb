@@ -19,6 +19,10 @@ public class Autoridad {
         return  nomb ;
     }
 
+    public Autoridad(boolean estado) {
+        this.estado = estado;
+    }
+
     public String getEstadoS() {
         return estadoS;
     }

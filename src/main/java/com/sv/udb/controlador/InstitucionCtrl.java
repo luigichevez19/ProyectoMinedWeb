@@ -27,7 +27,7 @@ public class InstitucionCtrl {
             try 
             {
              PreparedStatement cmd = con.prepareStatement("select ins.id_inst,ins.nomb_inst,ins.correo_inst,"
-               + "ins.dire_inst,m.id_dept,d.dept,m.id_muni,m.muni,CASE   ins.estado WHEN 1 THEN 'Habilitado' WHEN  0 THEN 'Desabilitado' END " 
+               + "ins.dire_inst,m.id_dept,d.dept,m.id_muni,m.muni,CASE   ins.estado WHEN 1 THEN 'Habilitado' WHEN  0 THEN 'Desahabilitado' END  " 
               +"from departamento d inner join  municipio m on  m.id_dept=d.id_dept inner join instituciones ins on ins.id_muni = m.id_muni");
              
              ResultSet rs = cmd.executeQuery();
@@ -35,6 +35,52 @@ public class InstitucionCtrl {
              {
              resp.add(new Institucion(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6)
              ,rs.getInt(7),rs.getString(8),rs.getString(9)));
+             }
+                
+            }
+            catch (Exception e) 
+            {
+                JOptionPane.showMessageDialog(null,"Error:"+e.getMessage());
+            }
+        return resp;
+    }
+    public Institucion consUno(int codi)
+    {
+        Institucion resp = null;
+        Connection con = new Conexion().getConn();
+            try 
+            {
+             PreparedStatement cmd = con.prepareStatement("select ins.id_inst,ins.nomb_inst,ins.correo_inst,"
+               + "ins.dire_inst,m.id_dept,d.dept,m.id_muni,m.muni,CASE   ins.estado WHEN 1 THEN 'Habilitado' WHEN  0 THEN 'Desahabilitado' END  " 
+              +"from departamento d inner join  municipio m on  m.id_dept=d.id_dept inner join instituciones ins on ins.id_muni = m.id_muni"
+                     + " where ins.id_inst=? ");
+             cmd.setInt(1, codi);
+             ResultSet rs = cmd.executeQuery();
+             while(rs.next())
+             {
+             resp=(new Institucion(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6)
+             ,rs.getInt(7),rs.getString(8),rs.getString(9)));
+             }
+                
+            }
+            catch (Exception e) 
+            {
+                JOptionPane.showMessageDialog(null,"Error:"+e.getMessage());
+            }
+        return resp;
+    }
+    public List<Institucion> consEstado(Institucion obj)
+    {
+        List<Institucion> resp = new ArrayList();
+        Connection con = new Conexion().getConn();
+            try 
+            {
+             PreparedStatement cmd = con.prepareStatement("select ins.estado from instituciones ins where ins.id_inst=?");
+             cmd.setInt(1,obj.getCodigo());
+             ResultSet rs = cmd.executeQuery();
+             while(rs.next())
+             {
+                resp.add(new Institucion(rs.getBoolean(1)));
              }
                 
             }
@@ -132,13 +178,12 @@ public class InstitucionCtrl {
     Connection con = new Conexion().getConn();
         try 
         {
-            PreparedStatement cmd = con.prepareStatement("Update  instituciones set nomb_inst=?, correo_inst=?,dire_inst=?,id_muni=?,estado=? where id_inst = ?");
+            PreparedStatement cmd = con.prepareStatement("Update  instituciones set nomb_inst=?, correo_inst=?,dire_inst=?,id_muni=? where id_inst = ?");
             cmd.setString(1,obje.getNomb());
             cmd.setString(2, obje.getCorreo());
             cmd.setString(3, obje.getDireccion());
             cmd.setInt(4, obje.getMunicipio());
-            cmd.setBoolean(5,obje.getEstado());
-            cmd.setInt(6,obje.getCodigo());
+           cmd.setInt(5,obje.getCodigo());
             cmd.executeUpdate();
             resp=true;
         }

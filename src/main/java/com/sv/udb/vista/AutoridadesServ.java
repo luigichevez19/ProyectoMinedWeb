@@ -5,11 +5,10 @@
  */
 package com.sv.udb.vista;
 
-import com.sv.udb.controlador.InstitucionCtrl;
-import com.sv.udb.modelo.Institucion;
+import com.sv.udb.controlador.AutoridadCtrl;
+import com.sv.udb.modelo.Autoridad;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luis
  */
-@WebServlet(name = "InstitucionesServ", urlPatterns = {"/InstitucionesServ"})
-public class InstitucionesServ extends HttpServlet {
+@WebServlet(name = "AutoridadesServ", urlPatterns = {"/AutoridadesServ"})
+public class AutoridadesServ extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,26 +33,24 @@ public class InstitucionesServ extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     boolean esValido = request.getMethod().equals("POST");
+        boolean esValido = request.getMethod().equals("POST");
        String mens="";
        
        if(!esValido)
        {
-            response.sendRedirect(request.getContextPath()+"/Instituciones.jsp");
+            response.sendRedirect(request.getContextPath()+"/Autoridades.jsp");
        }
        else
        {
-            String CRUD = request.getParameter("btnInsti");
+            String CRUD = request.getParameter("btnAuto");
                       
            if (CRUD.equals("Guardar"))
            {
-               Institucion obj = new Institucion();
+               Autoridad obj = new Autoridad();
                obj.setNomb(request.getParameter("nomb"));
                obj.setCorreo(request.getParameter("correo"));
-               obj.setDireccion(request.getParameter("dire"));
-               obj.setMunicipio(Integer.parseInt( request.getParameter("cmbMuni")));
                obj.setEstado(true);
-                if (new InstitucionCtrl().guar(obj)) 
+                if (new AutoridadCtrl().guar(obj)) 
                 {
                     mens = "Guardado";
                 }
@@ -64,13 +61,11 @@ public class InstitucionesServ extends HttpServlet {
            }
             if (CRUD.equals("Actualizar"))
            {
-               Institucion obj = new Institucion();
-               obj.setCodigo(Integer.parseInt(request.getParameter("codi")));
+               Autoridad obj = new Autoridad();
+               obj.setCodi(Integer.parseInt(request.getParameter("codi")));
                obj.setNomb(request.getParameter("nomb"));
                obj.setCorreo(request.getParameter("correo"));
-               obj.setDireccion(request.getParameter("dire"));
-               obj.setMunicipio(Integer.parseInt( request.getParameter("cmbMuni")));
-                if (new InstitucionCtrl().actu(obj)) 
+               if (new AutoridadCtrl().actu(obj)) 
                 {
                     mens = "Actualizado";
                 }
@@ -81,14 +76,14 @@ public class InstitucionesServ extends HttpServlet {
            }
            if (CRUD.equals("Modificar Estado"))
            {
-                Institucion obj = new Institucion();
-               obj.setCodigo(Integer.parseInt(request.getParameter("codi_muni").isEmpty()?"-1":request.getParameter("codi_muni")));
-                for(Institucion temp: new InstitucionCtrl().consEstado(obj))
+                Autoridad obj = new Autoridad();
+               obj.setCodi(Integer.parseInt(request.getParameter("codi_auto").isEmpty()?"-1":request.getParameter("codi_auto")));
+                for(Autoridad temp: new AutoridadCtrl().consEstado(obj))
                 {
                   obj.setEstado((temp.getEstado())?false:true);
                                      
                 }
-               if (new InstitucionCtrl().elim(obj)) 
+               if (new AutoridadCtrl().eliminar(obj)) 
                 {
                     mens = "Estado Actualizado";
                 }
@@ -101,17 +96,14 @@ public class InstitucionesServ extends HttpServlet {
             }
             if(CRUD.equals("Consultar"))
            {
-               int codi = Integer.parseInt(request.getParameter("codi_muni").isEmpty()?"-1":request.getParameter("codi_muni"));
-               Institucion obje = new InstitucionCtrl().consUno(codi);
+               int codi = Integer.parseInt(request.getParameter("codi_auto").isEmpty()?"-1":request.getParameter("codi_auto"));
+               Autoridad obje = new AutoridadCtrl().consUno(codi);
              
                if(obje != null)
                {
-                    request.setAttribute("codi", obje.getCodigo());
-                    request.setAttribute("nomb", obje.getNomb());
-                    request.setAttribute("dire", obje.getDireccion());
-                    request.setAttribute("correo", obje.getCorreo());
-                    request.setAttribute("id_muni", obje.getMunicipio());
-                             
+                   request.setAttribute("codi", obje.getCodi());
+                   request.setAttribute("nomb", obje.getNomb());
+                   request.setAttribute("correo", obje.getCorreo());          
                }
                else
                 {
@@ -120,7 +112,7 @@ public class InstitucionesServ extends HttpServlet {
                
            }
             request.setAttribute("mensAlert", mens);
-            request.getRequestDispatcher("/Instituciones.jsp").forward(request, response);
+            request.getRequestDispatcher("/Autoridades.jsp").forward(request, response);
        }
     }
 
